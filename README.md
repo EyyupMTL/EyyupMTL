@@ -192,7 +192,7 @@ I build games and interactive web experiences. Currently focused on improving my
 </div>
 
 <!-- COMMENTS:START -->
-_No comments yet — be the first to leave one!_
+<table><tr><td width="60" valign="top"><img src="https://github.com/EyyupMTL.png?size=40" width="48" height="48" style="border-radius:50%"/></td><td valign="top"><b><a href="https://github.com/EyyupMTL">@EyyupMTL</a></b> <sub>· <a href="https://github.com/EyyupMTL/EyyupMTL/issues/4">May 04, 2026</a></sub><br/>dsadsada</td></tr></table>
 <!-- COMMENTS:END -->
 
 ---
