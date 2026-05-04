@@ -150,7 +150,27 @@ I build games and interactive web experiences. Currently focused on improving my
 
 ---
 
+## `> Contribution Snake`
 
+<div align="center">
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/EyyupMTL/EyyupMTL/output/github-contribution-grid-snake-dark.svg" />
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/EyyupMTL/EyyupMTL/output/github-contribution-grid-snake.svg" />
+  <img alt="github-snake" src="https://raw.githubusercontent.com/EyyupMTL/EyyupMTL/output/github-contribution-grid-snake.svg" />
+</picture>
+
+</div>
+
+---
+
+## `> 3D Contribution Chart`
+
+<div align="center">
+
+<img src="./profile-3d-contrib/profile-night-rainbow.svg" alt="3d-contrib" />
+
+</div>
 
 ---
 
