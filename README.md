@@ -184,7 +184,7 @@ _No comments yet — be the first to leave one!_
 <a href="https://www.instagram.com/eyyup.mtl/">
   <img src="https://img.shields.io/badge/-Instagram-E4405F?style=for-the-badge&logo=instagram&logoColor=white" />
 </a>
-<a href="https://eyyupmtl.github.io/NatCat/">
+<a href="https://natcat0.vercel.app/">
   <img src="https://img.shields.io/badge/-Portfolio-222222?style=for-the-badge&logo=githubpages&logoColor=white" />
 </a>
 <a href="https://github.com/EyyupMTL">
