@@ -1,0 +1,92 @@
+name: Update Guestbook
+
+on:
+  issues:
+    types: [opened, edited, deleted, closed, reopened, labeled, unlabeled]
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: read
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Fetch guestbook issues
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue list \
+            --repo ${{ github.repository }} \
+            --label guestbook \
+            --state open \
+            --limit 10 \
+            --json number,author,body,createdAt,url \
+            > issues.json
+
+      - name: Render comments into README
+        run: |
+          python3 <<'PY'
+          import json, re
+          from datetime import datetime
+
+          with open("issues.json") as f:
+              issues = json.load(f)
+
+          if not issues:
+              rendered = "_No comments yet — be the first to leave one!_\n"
+          else:
+              parts = []
+              for it in issues:
+                  author = it["author"]["login"]
+                  avatar = f"https://github.com/{author}.png?size=40"
+                  body = (it.get("body") or "").strip()
+                  body = re.sub(r"^##.*\n", "", body)
+                  body = body.replace("\r\n", "\n").strip()
+                  if len(body) > 280:
+                      body = body[:280].rstrip() + "..."
+                  body_html = body.replace("\n", "<br/>")
+                  created = datetime.fromisoformat(it["createdAt"].replace("Z", "+00:00"))
+                  date_str = created.strftime("%b %d, %Y")
+                  url = it["url"]
+                  parts.append(
+                      f'<table><tr><td width="60" valign="top">'
+                      f'<img src="{avatar}" width="48" height="48" style="border-radius:50%"/>'
+                      f'</td><td valign="top">'
+                      f'<b><a href="https://github.com/{author}">@{author}</a></b> '
+                      f'<sub>· <a href="{url}">{date_str}</a></sub><br/>'
+                      f'{body_html}'
+                      f'</td></tr></table>'
+                  )
+              rendered = "\n\n".join(parts) + "\n"
+
+          with open("README.md", encoding="utf-8") as f:
+              content = f.read()
+
+          new_content = re.sub(
+              r"<!-- COMMENTS:START -->.*?<!-- COMMENTS:END -->",
+              f"<!-- COMMENTS:START -->\n{rendered}<!-- COMMENTS:END -->",
+              content,
+              flags=re.DOTALL,
+          )
+
+          with open("README.md", "w", encoding="utf-8") as f:
+              f.write(new_content)
+          PY
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet README.md; then
+            echo "No changes to commit"
+          else
+            git add README.md
+            git commit -m "chore: update guestbook"
+            git push
+          fi
