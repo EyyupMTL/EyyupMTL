@@ -127,7 +127,7 @@ I build games and interactive web experiences. Currently focused on improving my
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=EyyupMTL&theme=tokyonight&show_icons=true&hide_border=true&count_private=true&cache_seconds=86400" height="170" />
+
 <img src="https://streak-stats.demolab.com?user=EyyupMTL&theme=tokyonight&hide_border=true" height="170" />
 
 <br/><br/>
